@@ -15,64 +15,60 @@
  *
  */
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs"
+        apply plugin: 'com.android.application'
+        apply plugin: 'kotlin-android'
+        apply plugin: 'kotlin-android-extensions'
+        apply plugin: 'kotlin-kapt'
+        apply plugin: "androidx.navigation.safeargs"
 
-android {
-    compileSdkVersion 30
-    defaultConfig {
-        applicationId "com.example.android.marsrealestate"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        android {
+            compileSdkVersion 31
+            defaultConfig {
+                applicationId "com.example.android.marsrealestate"
+                minSdkVersion 21
+                targetSdkVersion 31
+                versionCode 1
+                versionName "1.0"
+                buildToolsVersion "31.0.0"
+            }
+            buildTypes {
+                release {
+                    minifyEnabled false
+                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                }
+            }
+            buildFeatures {
+                dataBinding true
+            }
+
+            compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
         }
-    }
-    buildFeatures {
-        dataBinding true
-    }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+        dependencies {
+            implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-}
+            // Kotlin
+            implementation "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+            // Constraint Layout
+            implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+            // ViewModel
+            implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
 
-    // Constraint Layout
-    implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
+            // Navigation
+            implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+            implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
+            // Core with Ktx
+            implementation "androidx.core:core-ktx:$version_core"
 
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+            // Moshi
+            implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
-    // Core with Ktx
-    implementation "androidx.core:core-ktx:$version_core"
-
-    /*implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
-    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"*/
-
-    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
-
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-}
+            // Retrofit with Moshi Converter
+            implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+        }
